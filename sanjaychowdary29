@@ -1,0 +1,2130 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-
+1"pageEncoding="ISO-8859-1" isELIgnored="false"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+ background-image: url('https://media.istockphoto.com/photos/woodtable-top-on-blur-window-glasswall-background-pictureid1129572627?k=20&m=1129572627&s=612x612&w=0&h=Z1fnJQgoiB1
+bJ5z1MUbiOQPckT7QPAdVQ6nN2guf6_k=');
+ background-repeat: no-repeat;
+background-attachment: fixed;
+ background-size: cover;
+}
+body {font-family: Arial, Helvetica, sans-serif;}
+form {border: 3px solid #f1f1f1;}
+input[type=text], input[type=password] {
+ width: 30%;
+ padding: 12px 20px;
+ margin: 8px 0;
+ display: inline-block;
+ border: 1px solid #ccc;
+ box-sizing: border-box;
+}
+button {
+ background-color: #04AA6D;
+ color: white;
+ padding: 14px 20px;
+ margin: 8px 0;
+ border: none;
+ cursor: pointer;
+ width: 30%;
+}
+button:hover {
+ opacity: 0.8;
+}
+.cancelbtn {
+ width: auto;
+ padding: 10px 18px;
+ background-color: #f44336;
+}
+.imgcontainer {
+ text-align: center;
+ margin: 24px 0 12px 0;
+}
+img.avatar {
+ width: 30%;
+ border-radius: 50%;
+}
+.container {
+ padding: 16px;
+}
+span.psw {
+ float: right;
+ padding-top: 16px;
+}
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+ span.psw {
+ display: block;
+ float: none;
+ }
+ .cancelbtn {
+ width: 100%;
+ }
+}
+</style>
+</head>
+<body>
+<h1 style="color:midnightblue; text-align: center">Admin Login
+Form</h1>
+<form action="loginAdmin" method="post">
+ <div class="imgcontainer">
+ <img src="https://png.pngtree.com/pngvector/20190301/ourlarge/pngtree-vector-administration-icon-pngimage_747092.jpg" height="400" alt="Avatar" class="avatar">
+ </div>
+<h2 style="color:red">${msg}</h2>
+ <div class="container">
+ <label for="uname"><b>Email</b></label><br>
+ <input type="text" placeholder="Enter Email" name="email"
+required>
+<br>
+ <label for="psw"><b>Password</b></label><br>
+ <input type="password" placeholder="Enter Password"
+name="password" required> <br>
+ <button type="submit">Login</button>
+ </div>
+</form>
+</body>
+</html>
+addProduct.Jsp:
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+ pageEncoding="ISO-8859-1"%>
+ <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+input[type=text], input[type=password] {
+ width: 30%;
+ padding: 12px 20px;
+ margin: 8px 0;
+ display: inline-block;
+ border: 1px solid #ccc;
+ box-sizing: border-box;
+}
+button {
+ background-color: #04AA6D;
+ color: white;
+ padding: 14px 20px;
+ margin: 8px 0;
+ border: none;
+ cursor: pointer;
+ width: 30%;
+}
+button:hover {
+ opacity: 0.8;
+}
+.cancelbtn {
+ width: auto;
+ padding: 10px 18px;
+ background-color: #f44336;
+}
+.imgcontainer {
+ text-align: center;
+ margin: 24px 0 12px 0;
+}
+img.avatar {
+ width: 30%;
+ border-radius: 50%;
+}
+.container {
+ padding: 16px;
+}
+span.psw {
+ float: right;
+ padding-top: 16px;
+}
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+ span.psw {
+ display: block;
+ float: none;
+ }
+ .cancelbtn {
+ width: 100%;
+ }
+}
+body {
+ background-image: url('https://wallpaperaccess.com/full/271686.jpg');
+ background-repeat: no-repeat;
+background-attachment: fixed;
+ background-size: cover;
+}
+</style>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<form:form action="saveProduct" modelAttribute="productDTO">
+<h3 style="color:indigo;">Name: <br><form:input path="name"/></h3><br>
+<h3 style="color:indigo;">Type: <br><form:input path="type"/></h3><br>
+<h3 style="color:indigo;">Cost: <br><form:input path="cost"/></h3><br>
+<form:button>Submit</form:button>
+</form:form>
+</body>
+</html>
+Product List:
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+ pageEncoding="ISO-8859-1"%>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+a:link, a:visited {
+ background-color: white;
+ color: black;
+ border: 2px solid green;
+ padding: 10px 20px;
+ text-align: center;
+ text-decoration: none;
+ display: inline-block;
+}
+a:hover, a:active {
+ background-color: green;
+ color: white;
+}
+body {
+ background-image:
+url('https://www.expatrio.com/sites/default/files/styles/image_slider/public/2
+022-05/hermes-rivera-Ww8eQWjMJWk-unsplash_3.jpg?itok=aqyA4cvZ');
+ background-repeat: no-repeat;
+background-attachment: fixed;
+ background-size: cover;
+}
+#customers {
+ font-family: Arial, Helvetica, sans-serif;
+ border-collapse: collapse;
+ width: 100%;
+}
+#customers td, #customers th {
+ border: 1px solid #ddd;
+ padding: 20px;
+}
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+#customers tr:hover {background-color: #ddd;}
+#customers th {
+ padding-top: 12px;
+ padding-bottom: 12px;
+ text-align: left;
+ background-color: #04AA6D;
+ color: white;
+}
+</style>
+<meta charset="ISO-8859-1">
+<title>Products</title>
+</head>
+<body>
+<table id="customers" class="w3-table-all w3-xxxlarge" border="1"
+style="background:azure;" >
+<tr>
+<th>Product Id</th>
+<th>Product Name</th>
+<th>Product Type</th>
+<th>Product Cost</th>
+<th>Delete</th>
+<th>Edit</th>
+</tr>
+<c:forEach var="product" items="${products}">
+<tr>
+<td>${product.getId()}</td>
+<td>${product.getName()}</td>
+<td>${product.getType()}</td>
+<td>${product.getCost()}</td>
+<td><a href="deleteProduct?Id=${product.getId()}">Delete</a>
+<td><a href="updateProduct?Id=${product.getId()}">Edit</a>
+</tr>
+</c:forEach>
+</table>
+<a href="home.jsp">Back</a>
+</body>
+</html>
+addUser.jsp:
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+ pageEncoding="ISO-8859-1"%>
+ <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+input[type=text], input[type=password] {
+ width: 30%;
+ padding: 12px 20px;
+ margin: 8px 0;
+ display: inline-block;
+ border: 1px solid #ccc;
+ box-sizing: border-box;
+}
+button {
+ background-color: #04AA6D;
+ color: white;
+ padding: 14px 20px;
+ margin: 8px 0;
+ border: none;
+ cursor: pointer;
+ width: 30%;
+}
+button:hover {
+ opacity: 0.8;
+}
+.cancelbtn {
+ width: auto;
+ padding: 10px 18px;
+ background-color: #f44336;
+}
+.imgcontainer {
+ text-align: center;
+ margin: 24px 0 12px 0;
+}
+img.avatar {
+ width: 30%;
+ border-radius: 50%;
+}
+.container {
+ padding: 16px;
+}
+span.psw {
+ float: right;
+ padding-top: 16px;
+}
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+ span.psw {
+ display: block;
+ float: none;
+ }
+ .cancelbtn {
+ width: 100%;
+ }
+}
+body {
+font-family: Arial, Helvetica, sans-serif;
+ background-image: url('https://wallpaperaccess.com/full/271686.jpg');
+ background-repeat: no-repeat;
+background-attachment: fixed;
+ background-size: cover;
+}
+</style>
+<meta charset="ISO-8859-1">
+<title>Add User</title>
+</head>
+<body>
+<form:form action="saveUser" modelAttribute="userDTO">
+<h3 style="color:indigo;">Name:<br> <form:input path="name"/></h3><br>
+<h3 style="color:indigo;">Email: <br><form:input path="email"/></h3><br>
+<h3 style="color:indigo;">Password: <br><form:input
+path="password"/></h3><br>
+<form:button>Submit</form:button>
+</form:form>
+</body>
+</html>
+bill.jsp
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+ pageEncoding="ISO-8859-1" isELIgnored="false"%>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+a:link, a:visited {
+ background-color: white;
+ color: black;
+ border: 2px solid green;
+ padding: 10px 20px;
+ text-align: center;
+ text-decoration: none;
+ display: inline-block;
+}
+a:hover, a:active {
+ background-color: green;
+ color: white;
+}
+body {
+ background-image:
+url('https://www.expatrio.com/sites/default/files/styles/image_slider/public/2
+022-05/hermes-rivera-Ww8eQWjMJWk-unsplash_3.jpg?itok=aqyA4cvZ');
+background-repeat: no-repeat;
+background-attachment: fixed;
+ background-size: cover;
+}
+#customers {
+ font-family: Arial, Helvetica, sans-serif;
+ border-collapse: collapse;
+ width: 100%;
+}
+#customers td, #customers th {
+ border: 1px solid #ddd;
+ padding: 20px;
+}
+#customers tr:nth-child(even){background-color: white;}
+#customers tr:hover {background-color: #ddd;}
+#customers th {
+ padding-top: 12px;
+ padding-bottom: 12px;
+ text-align: left;
+ background-color: #04AA6D;
+ color: white;
+}
+</style>
+<meta charset="ISO-8859-1">
+<title>Bill</title>
+</head>
+<body>
+<h1 style="text-align: center;color:green" >Bill</h1>
+<table id="customers" class="w3-table-all w3-xxxlarge" border="1"
+style="background:azure;" >
+<tr>
+<th>Ordered By :</th>
+<td>${foodOrder.getName()}</td>
+</tr>
+<tr>
+<th>Mobile Number :</th>
+<td>${foodOrder.getMob()}</td>
+</tr>
+<tr><td></td>
+</tr>
+<tr>
+<th>Item Name</th>
+<th>Item Quantity</th>
+<th>Item Cost</th>
+</tr>
+<c:forEach var="item" items="${foodOrder.getItemDTOs()}">
+<tr>
+<td>${item.getName()}</td>
+<td>${item.getQuantity()}</td>
+<td>${item.getCost()}</td>
+</tr>
+</c:forEach>
+<tr><td></td>
+<td></td><th>
+Total</th>
+</tr>
+<tr><td></td>
+<td></td>
+<th>
+${foodOrder.getCost()}
+</th>
+</tr>
+</table>
+<a href="logout">Logout</a>
+</body>
+</html>
+home.jsp:
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+ background-image: url('https://wallpapercave.com/wp/wp1874156.jpg');
+ background-repeat: no-repeat;
+background-attachment: fixed;
+ background-size: cover;
+}
+ul {
+ list-style-type: none;
+ margin: 0;
+ padding: 0;
+ overflow: hidden;
+ background-color: #333;
+}
+li {
+ float: left;
+ border-right:3px solid #bbb;
+}
+li:last-child {
+ border-right:3px solid #bbb;
+}
+li a {
+ display: block;
+ color: white;
+ text-align: center;
+ padding: 38px 60px;
+ text-decoration: none;nkW }
+li a:hover:not(.active) {
+ background-color: #111;
+}
+.active {
+ background-color: #04AA6D;
+}
+</style>
+</head>
+<body>
+<h1 style="color:white; font-weight:bold;font-style:italic; text-align:
+center;">ADMIN PAGE</h1>
+<h1 style="color:green;font-style:italic;font-weight:bold">${msg}</h1>
+<ul>
+ <li><a class="active" href="loginUser.jsp">Login User</a></li>
+ <li><a href="loadUser" >Add User</a></li>
+ <li><a href="loadProduct">Add Product</a></li>
+ <li><a href="productList">Product List</a></li>
+ <li><a href="userList">User List</a></li>
+ <li><a href="index.jsp">Logout</a></li>
+</ul>
+</body>
+</html>
+loginUser.jsp:
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+ pageEncoding="ISO-8859-1" isELIgnored="false"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Login User</title>
+<style>
+body {
+ background-image: url('https://encryptedtbn0.gstatic.com/images?q=tbn:ANd9GcS8hoszhoBY8kd1jDW19QRwybegU10P
+NjFHkw&usqp=CAU ');
+ background-repeat: no-repeat;
+background-attachment: fixed;
+ background-size: cover;
+}
+body {font-family: Arial, Helvetica, sans-serif;}
+form {border: 3px solid #f1f1f1;}
+input[type=text], input[type=password] {
+ width: 30%;
+ padding: 12px 20px;
+ margin: 8px 0;
+ display: inline-block;
+ border: 1px solid #ccc;
+ box-sizing: border-box;
+}
+button {
+ background-color: #04AA6D;
+ color: white;
+ padding: 14px 20px;
+ margin: 8px 0;
+ border: none;
+ cursor: pointer;
+ width: 30%;
+}
+button:hover {
+ opacity: 0.8;
+}
+.cancelbtn {
+ width: auto;
+ padding: 10px 18px;
+ background-color: #f44336;
+}
+.imgcontainer {
+ text-align: center;
+ margin: 24px 0 12px 0;
+}
+img.avatar {
+ width: 30%;
+ border-radius: 50%;
+}
+.container {
+ padding: 16px;
+}
+span.psw {
+ float: right;
+ padding-top: 16px;
+}
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+ span.psw {
+ display: block;
+ float: none;
+ }
+ .cancelbtn {
+ width: 100%;
+ }
+}
+</style>
+</head>
+<body>
+<h1 style="color:blue; text-align: center">User Login Form</h1>
+<form action="loginUser" method="post">
+<div class="imgcontainer">
+ <img src="https://cdn.pixabay.com/photo/2020/07/01/12/58/icon5359553_1280.png" height="400" alt="Avatar" class="avatar">
+ </div>
+ <h3 style="color:red;">${msg}</h3>
+ <div class="container">
+ <label for="uname"><b>Email</b></label><br>
+ <input type="text" placeholder="Enter Email" name="email" required>
+<br>
+ <label for="psw"><b>Password</b></label><br>
+ <input type="password" placeholder="Enter Password" name="password"
+required>
+ <br>
+ <button type="submit">Login</button>
+
+ </div>
+</form>
+</body>
+</html>
+menu.jsp:
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+ pageEncoding="ISO-8859-1" isELIgnored="false"%>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+a:link, a:visited {
+ background-color: white;
+ color: black;
+ border: 2px solid green;
+ padding: 10px 20px;
+ text-align: center;
+ text-decoration: none;
+ display: inline-block;
+}
+a:hover, a:active {
+ background-color: green;
+ color: white;
+}
+body {
+ background-image:
+url('https://www.expatrio.com/sites/default/files/styles/image_slider/public/2
+022-05/hermes-rivera-Ww8eQWjMJWk-unsplash_3.jpg?itok=aqyA4cvZ');
+ background-repeat: no-repeat;
+background-attachment: fixed;
+ background-size: cover;
+}
+#customers {
+ font-family: Arial, Helvetica, sans-serif;
+ border-collapse: collapse;
+ width: 100%;
+}
+#customers td, #customers th {
+ border: 1px solid #ddd;
+ padding: 20px;
+}
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+#customers tr:hover {background-color: #ddd;}
+#customers th {
+ padding-top: 12px;
+ padding-bottom: 12px;
+ text-align: left;
+ background-color: #04AA6D;
+ color: white;
+}
+</style>
+<meta charset="ISO-8859-1">
+<title>Menu</title>
+</head>
+<body>
+<h2 style="color:green; font-weight:bold;font-style:italic; text-align:
+center">${msg}</h2>
+<h1 style="color:blue; font-weight:bold;font-style:italic; text-align:
+center">MENU</h1>
+<table id="customers" class="w3-table-all w3-xxxlarge" border="1"
+style="background:azure;" >
+<tr>
+<th>Product Id</th>
+<th>Product Name</th>
+<th>Product Type</th>
+<th>Product Cost</th>
+<th>Add</th>
+</tr>
+<c:forEach var="product" items="${products}">
+<tr>
+<td>${product.getId()}</td>
+<td>${product.getName()}</td>
+<td>${product.getType()}</td>
+<td>${product.getCost()}</td>
+<td><a href="addOrder?Id=${product.getId()}">Add</a>
+</tr>
+</c:forEach>
+</table>
+<a href="submitOrder">Submit</a><br>
+<a href="userNavigation.jsp">Back</a><br>
+<a href="logout">Logout</a>
+</body>
+</html>
+updateProduct.jsp:
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+ pageEncoding="ISO-8859-1"%>
+ <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+ background-image: url('https://www.pixelstalk.net/wpcontent/uploads/2016/08/Download-Images-Food-HD.jpg');
+ background-repeat: no-repeat;
+background-attachment: fixed;
+ background-size: cover;
+}
+</style>
+<meta charset="ISO-8859-1">
+<title>Update Product</title>
+</head>
+<body>
+<form:form action="updateproduct1" modelAttribute="product">
+<h3 style="color:indigo;">Product Name: <form:input
+path="name"/></h3><br>
+<h3 style="color:indigo;">Product Type: <form:input path="type"/></h3><br>
+<h3 style="color:indigo;">Product Cost: <form:input path="cost"/></h3><br>
+<h3 style="color:indigo;">Product Id: <form:input path="id"
+readonly="true"/></h3><br>
+<form:button>Submit</form:button>
+</form:form>
+</body>
+</html>
+foodOrder.jsp:
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+ pageEncoding="ISO-8859-1"%>
+ <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+a:link, a:visited {
+ background-color: white;
+ color: black;
+ border: 2px solid green;
+ padding: 10px 20px;
+ text-align: center;
+ text-decoration: none;
+ display: inline-block;
+}
+a:hover, a:active {
+ background-color: green;
+ color: white;
+}
+input[type=text], input[type=password] {
+ width: 30%;
+ padding: 12px 20px;
+ margin: 8px 0;
+ display: inline-block;
+ border: 1px solid #ccc;
+ box-sizing: border-box;
+}
+button {
+ background-color: #04AA6D;
+ color: white;
+ padding: 14px 20px;
+ margin: 8px 0;
+ border: none;
+ cursor: pointer;
+ width: 30%;
+}
+button:hover {
+ opacity: 0.8;
+}
+body {
+ background-image: url('https://images2.alphacoders.com/862/862730.jpg');
+ background-repeat: no-repeat;
+background-attachment: fixed;
+ background-size: cover;
+}
+</style>
+<meta charset="ISO-8859-1">
+<title>Order Food</title>
+</head>
+<body>
+<form:form action="foodOrder2" modelAttribute="foodOrder">
+<h3 style="color:yellow;">Name: <br><form:input path="name"/></h3><br>
+<h3 style="color:yellow;">Phone No: <br><form:input
+path="mob"/></h3><br>
+<form:button>Register</form:button><br>
+<a href="userNavigation.jsp">Back</a>
+</form:form>
+</body>
+</html>
+fetchAllOrder.jsp:
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+ pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+a:link, a:visited {
+ background-color: white;
+ color: black;
+ border: 2px solid green;
+ padding: 10px 20px;
+ text-align: center;
+ text-decoration: none;
+ display: inline-block;
+}
+a:hover, a:active {
+ background-color: green;
+ color: white;
+}
+body {
+ background-image:
+url('https://www.expatrio.com/sites/default/files/styles/image_slider/public/2
+022-05/hermes-rivera-Ww8eQWjMJWk-unsplash_3.jpg?itok=aqyA4cvZ');
+ background-repeat: no-repeat;
+background-attachment: fixed;
+ background-size: cover;
+}
+#customers {
+ font-family: Arial, Helvetica, sans-serif;
+ border-collapse: collapse;
+ width: 100%;
+}
+#customers td, #customers th {
+ border: 1px solid #ddd;
+ padding: 20px;
+}
+#customers tr:nth-child(even){background-color: white;}
+#customers tr:hover {background-color: #ddd;}
+#customers th {
+ padding-top: 12px;
+ padding-bottom: 12px;
+ text-align: left;
+ background-color: #04AA6D;
+ color: white;
+}
+</style>
+<meta charset="ISO-8859-1">
+<title>All Orders</title>
+</head>
+<body>
+<c:forEach var="foodOrder" items="${list3}">
+<table id="customers" class="w3-table-all w3-xxxlarge" border="1"
+style="background:azure;" >
+<tr>
+<th>Ordered By :</th>
+<td>${foodOrder.getName()}</td>
+</tr>
+<tr>
+<th>Mobile Number :</th>
+<td>${foodOrder.getMob()}</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<th>Item Name</th>
+<th>Item Quantity</th>
+<th>Item Cost</th>
+</tr>
+<c:forEach var="item" items="${foodOrder.getItemDTOs()}">
+<tr>
+<td>${item.getName()}</td>
+<td>${item.getQuantity()}</td>
+<td>${item.getCost()}</td>
+</tr>
+</c:forEach>
+<tr>
+<td>
+</td>
+<td>
+</td>
+<th>
+Total
+</th>
+</tr>
+<tr><td></td>
+<td></td>
+<th>
+${foodOrder.getCost()}
+</th>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</table>
+</c:forEach>
+<a href="logout">Logout</a>
+</body>
+</html>
+addOrder.jsp:
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+ pageEncoding="ISO-8859-1"%>
+ <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+a:link, a:visited {
+ background-color: white;
+ color: black;
+ border: 2px solid green;
+ padding: 10px 20px;
+ text-align: center;
+ text-decoration: none;
+ display: inline-block;
+}
+a:hover, a:active {
+ background-color: green;
+ color: white;
+}
+input[type=text], input[type=password] {
+ width: 30%;
+ padding: 12px 20px;
+ margin: 8px 0;
+ display: inline-block;
+ border: 1px solid #ccc;
+ box-sizing: border-box;
+}
+button {
+ background-color: #04AA6D;
+ color: white;
+ padding: 14px 20px;
+ margin: 8px 0;
+ border: none;
+ cursor: pointer;
+ width: 30%;
+}
+button:hover {
+ opacity: 0.8;
+}
+body {
+ background-image: url('https://wallpaperaccess.com/full/271686.jpg');
+ background-repeat: no-repeat;
+background-attachment: fixed;
+ background-size: cover;
+}
+</style>
+<meta charset="ISO-8859-1">
+<title>Add Order</title>
+</head>
+<body>
+<h1 style="color:red; font-weight:bold;font-style:italic; text-align:
+center">Select Quantity</h1>
+<form:form action="addItem" modelAttribute="item">
+<h3 style="color:indigo;">Name:<br> <form:input path="name"
+readonly="readonly"/></h3><br>
+<h3 style="color:indigo;">Cost: <br><form:input path="cost"
+readonly="readonly"/></h3><br>
+<h3 style="color:indigo;">Quantity: <br><form:input
+path="quantity"/></h3><br>
+<form:button >Submit</form:button><br>
+<a href="menu">Back</a>
+</form:form>
+</body>
+</html>
+updateUser.jsp:
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+ pageEncoding="ISO-8859-1"%>
+ <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+ background-image: url('https://www.pixelstalk.net/wpcontent/uploads/2016/08/Download-Images-Food-HD.jpg');
+ background-repeat: no-repeat;
+background-attachment: fixed;
+ background-size: cover;
+}
+</style>
+<meta charset="ISO-8859-1">
+<title>Update User</title>
+</head>
+<body>
+<form:form action="updateuser1" modelAttribute="user">
+<h3 style="color:indigo;">User Name: <form:input path="name"/></h3><br>
+<h3 style="color:indigo;">User Email: <form:input path="email"/></h3><br>
+<h3 style="color:indigo;">User Password: <form:input
+path="password"/></h3><br>
+<h3 style="color:indigo;">User Id: <form:input path="id"
+readonly="true"/></h3><br>
+<form:button>Submit</form:button>
+</form:form>
+</body>
+</html>
+userlist.jsp:
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+ pageEncoding="ISO-8859-1"%>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+a:link, a:visited {
+ background-color: white;
+ color: black;
+ border: 2px solid green;
+ padding: 10px 20px;
+ text-align: center;
+ text-decoration: none;
+ display: inline-block;
+}
+body {
+ background-image:
+url('https://www.expatrio.com/sites/default/files/styles/image_slider/public/2
+022-05/hermes-rivera-Ww8eQWjMJWk-unsplash_3.jpg?itok=aqyA4cvZ');
+ background-repeat: no-repeat;
+background-attachment: fixed;
+ background-size: cover;
+}
+#customers {
+ font-family: Arial, Helvetica, sans-serif;
+ border-collapse: collapse;
+ width: 100%;
+}
+#customers td, #customers th {
+ border: 1px solid #ddd;
+ padding: 20px;
+}
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+#customers tr:hover {background-color: #ddd;}
+#customers th {
+ padding-top: 12px;
+ padding-bottom: 12px;
+ text-align: left;
+ background-color: #04AA6D;
+ color: white;
+}
+</style>
+<meta charset="ISO-8859-1">
+<title>Products</title>
+</head>
+<body>
+<table id="customers" border="1" style=background:azure;>
+<tr>
+<th>User Id</th>
+<th>User Name</th>
+<th>User Email</th>
+<th>User Password</th>
+<th>Delete</th>
+<th>Edit</th>
+</tr>
+<c:forEach var="user" items="${users}">
+<tr>
+<td>${user.getId()}</td>
+<td>${user.getName()}</td>
+<td>${user.getEmail()}</td>
+<td>${user.getPassword()}</td>
+<td><a href="deleteUser?Id=${user.getId()}">Delete</a>
+<td><a href="updateUser?Id=${user.getId()}">Edit</a>
+</tr>
+</c:forEach>
+</table>
+<a href="home.jsp">Back</a>
+</body>
+</html>
+userNavigation.jsp:
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+ background-image: url('https://images2.alphacoders.com/862/862730.jpg');
+ background-repeat: no-repeat;
+background-attachment: fixed;
+ background-size: cover;
+}
+ul {
+ list-style-type: none;
+ margin: 0;
+ padding: 0;
+ overflow: hidden;
+ background-color: #333;
+}
+li {
+ float: left;
+ border-right:3px solid #bbb;
+}
+li:last-child {
+ border-right:3px solid #bbb;
+}
+li a {
+ display: block;
+ color: white;
+text-align: center;
+ padding: 34px 36px;
+ text-decoration: none;nkW }
+li a:hover:not(.active) {
+ background-color: #111;
+}
+.active {
+ background-color: #04AA6D;
+}
+</style>
+</head>
+<body>
+<h2 style="color:green;">${msg}</h2>
+<ul>
+ <li><a class="active" href="foodOrder1">Order Food</a></li>
+ <li><a href="fetchallorder">All Food Orders</a></li>
+ <li><a href="logout">Logout</a></li>
+</ul>
+</body>
+</html>
+config.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:context="http://www.springframework.org/schema/context"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans.xsd
+ http://www.springframework.org/schema/context
+ http://www.springframework.org/schema/context/spring-context3.0.xsd">
+<context:component-scan basepackage="com.ty.foodorder"></context:component-scan>
+<context:annotation-config></context:annotation-config>
+</beans>
+Persistence.xml
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+version="2.1">
+<persistence-unit name="dev">
+<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+<shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
+<!-- for caching -->
+<properties>
+<property name="javax.persistence.jdbc.driver"
+value="com.mysql.cj.jdbc.Driver" />
+<property name="javax.persistence.jdbc.url"
+value="jdbc:mysql://localhost:3306/foodorder" />
+<property name="javax.persistence.jdbc.user"
+value="root" />
+<property name="javax.persistence.jdbc.password"
+value="root" />
+<property name="hibernate.show_sql" value="true" />
+<property name="hibernate.hbm2ddl.auto" value="update"
+/>
+<property name="hibernate.dialect"
+value="org.hibernate.dialect.MySQL8Dialect"/>
+</properties>
+</persistence-unit>
+</persistence>
+pom.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+http://maven.apache.org/xsd/maven-4.0.0.xsd">
+ <modelVersion>4.0.0</modelVersion>
+ <groupId>com.ty</groupId>
+ <artifactId>Spring_MVC_School</artifactId>
+ <version>0.0.1-SNAPSHOT</version>
+ <packaging>war</packaging>
+ <name>Spring_MVC_School Maven Webapp</name>
+ <!-- FIXME change it to the project's website -->
+ <url>http://www.example.com</url>
+ <properties>
+ <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+ <maven.compiler.source>1.7</maven.compiler.source>
+ <maven.compiler.target>1.7</maven.compiler.target>
+ </properties>
+ <dependencies>
+ <dependency>
+ <groupId>junit</groupId>
+ <artifactId>junit</artifactId>
+ <version>4.11</version>
+ <scope>test</scope>
+ </dependency>
+ <dependency>
+<groupId>javax.servlet</groupId>
+<artifactId>javax.servlet-api</artifactId>
+<version>4.0.1</version>
+<scope>provided</scope>
+</dependency>
+<dependency>
+<groupId>javax.servlet.jsp</groupId>
+<artifactId>jsp-api</artifactId>
+<version>2.2</version>
+<scope>provided</scope>
+</dependency>
+<dependency>
+<groupId>javax.servlet</groupId>
+<artifactId>jstl</artifactId>
+<version>1.2</version>
+</dependency>
+<dependency>
+<groupId>org.springframework</groupId>
+<artifactId>spring-context</artifactId>
+<version>5.3.13</version>
+</dependency>
+<dependency>
+<groupId>org.springframework</groupId>
+<artifactId>spring-webmvc</artifactId>
+<version>5.3.13</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.hibernate/hibernatecore -->
+<dependency>
+<groupId>org.hibernate</groupId>
+<artifactId>hibernate-core</artifactId>
+<version>5.6.5.Final</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/mysql/mysql-connectorjava -->
+<dependency>
+<groupId>mysql</groupId>
+<artifactId>mysql-connector-java</artifactId>
+<version>8.0.27</version>
+</dependency>
+ </dependencies>
+ <build>
+ <finalName>Spring_MVC_School</finalName>
+ <pluginManagement><!-- lock down plugins versions to avoid using Maven
+defaults (may be moved to parent pom) -->
+ <plugins>
+ <plugin>
+ <artifactId>maven-clean-plugin</artifactId>
+ <version>3.1.0</version>
+ </plugin>
+ <!-- see http://maven.apache.org/ref/current/maven-core/defaultbindings.html#Plugin_bindings_for_war_packaging -->
+ <plugin>
+ <artifactId>maven-resources-plugin</artifactId>
+ <version>3.0.2</version>
+ </plugin>
+ <plugin>
+ <artifactId>maven-compiler-plugin</artifactId>
+ <version>3.8.0</version>
+ </plugin>
+ <plugin>
+ <artifactId>maven-surefire-plugin</artifactId>
+ <version>2.22.1</version>
+ </plugin>
+ <plugin>
+ <artifactId>maven-war-plugin</artifactId>
+ <version>3.2.2</version>
+ </plugin>
+ <plugin>
+ <artifactId>maven-install-plugin</artifactId>
+ <version>2.5.2</version>
+ </plugin>
+ <plugin>
+ <artifactId>maven-deploy-plugin</artifactId>
+ <version>2.8.2</version>
+ </plugin>
+ </plugins>
+ </pluginManagement>
+ </build>
+</project>
+Helper classes:
+Configuration.java
+package com.ty.foodorder.Helper;
+import javax.persistence.EntityManagerFactory ;
+import javax.persistence.Persistence ;
+import org.springframework.context.annotation.Bean ;
+@org.springframework.context.annotation.Configuration
+public class Configuration
+{
+@Bean("entityManagerFactory")
+public EntityManagerFactory entityManagerFactory()
+{
+EntityManagerFactory
+entityManagerFactory=Persistence.createEntityManagerFactory ( "dev" );
+return entityManagerFactory;
+}
+}
+DTO classes:
+AdminDto.java
+package com.ty.foodorder.DTO;
+import javax.persistence.Entity ;
+import javax.persistence.GeneratedValue ;
+import javax.persistence.GenerationType ;
+import javax.persistence.Id ;
+@Entity
+public class AdminDTO
+{
+@Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+private int id;
+private String email;
+private String password;
+public int getId ( )
+{
+return id ;
+}
+public void setId ( int id )
+{
+this.id = id ;
+}
+public String getEmail ( )
+{
+return email ;
+}
+public void setEmail ( String email )
+{
+this.email = email ;
+}
+public String getPassword ( )
+{
+return password ;
+}
+public void setPassword ( String password )
+{
+this.password = password ;
+}
+}
+FoodOrderDto.java
+package com.ty.foodorder.DTO;
+import java.util.List ;
+import javax.persistence.CascadeType ;
+import javax.persistence.Entity ;
+import javax.persistence.GeneratedValue ;
+import javax.persistence.GenerationType ;
+import javax.persistence.Id ;
+import javax.persistence.JoinColumn ;
+import javax.persistence.ManyToOne ;
+import javax.persistence.OneToMany ;
+@Entity
+public class FoodOrderDTO
+{
+@Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+private int id;
+private String name;
+private long mob;
+private double cost;
+@ManyToOne
+@JoinColumn
+UserDTO userDTO;
+@OneToMany(mappedBy = "foodOrderDTO",cascade =
+CascadeType.ALL)
+private List < ItemDTO > itemDTOs;
+public UserDTO getUserDTO ( )
+{
+return userDTO ;
+}
+public void setUserDTO ( UserDTO userDTO )
+{
+this.userDTO = userDTO ;
+}
+public List < ItemDTO > getItemDTOs ( )
+{
+return itemDTOs ;
+}
+public void setItemDTOs ( List < ItemDTO > itemDTOs )
+{
+this.itemDTOs = itemDTOs ;
+}
+public int getId ( )
+{
+return id ;
+}
+public void setId ( int id )
+{
+this.id = id ;
+}
+public String getName ( )
+{
+return name ;
+}
+public void setName ( String name )
+{
+this.name = name ;
+}
+public long getMob ( )
+{
+return mob ;
+}
+public void setMob ( long mob )
+{
+this.mob = mob ;
+}
+public double getCost ( )
+{
+return cost ;
+}
+public void setCost ( double cost )
+{
+this.cost = cost ;
+}
+}
+ItemDto.java
+package com.ty.foodorder.DTO;
+import javax.persistence.Entity ;
+import javax.persistence.GeneratedValue ;
+import javax.persistence.GenerationType ;
+import javax.persistence.Id ;
+import javax.persistence.JoinColumn ;
+import javax.persistence.ManyToOne ;
+@Entity
+public class ItemDTO
+{
+@Id
+@GeneratedValue(strategy=GenerationType.IDENTITY)
+private int id;
+private String name;
+private double cost;
+private int quantity;
+@ManyToOne
+@JoinColumn
+private FoodOrderDTO foodOrderDTO;
+public int getId ( )
+{
+return id ;
+}
+public void setId ( int id )
+{
+this.id = id ;
+}
+public String getName ( )
+{
+return name ;
+}
+public void setName ( String name )
+{
+this.name = name ;
+}
+public double getCost ( )
+{
+return cost ;
+}
+public void setCost ( double cost )
+{
+this.cost = cost ;
+}
+public FoodOrderDTO getFoodOrderDTO ( )
+{
+return foodOrderDTO ;
+}
+public void setFoodOrderDTO ( FoodOrderDTO foodOrderDTO )
+{
+this.foodOrderDTO = foodOrderDTO ;
+}
+public int getQuantity ( )
+{
+return quantity ;
+}
+public void setQuantity ( int quantity )
+{
+this.quantity = quantity ;
+}
+}
+ProductDto.java
+package com.ty.foodorder.DTO;
+import javax.persistence.Entity ;
+import javax.persistence.GeneratedValue ;
+import javax.persistence.GenerationType ;
+import javax.persistence.Id ;
+@Entity
+public class ProductDTO
+{
+@Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+private int id;
+private String name;
+private String type;
+private double cost;
+public int getId ( )
+{
+return id ;
+}
+public void setId ( int id )
+{
+this.id = id ;
+}
+public String getName ( )
+{
+return name ;
+}
+public void setName ( String name )
+{
+this.name = name ;
+}
+public String getType ( )
+{
+return type ;
+}
+public void setType ( String type )
+{
+this.type = type ;
+}
+public double getCost ( )
+{
+return cost ;
+}
+public void setCost ( double cost )
+{
+this.cost = cost ;
+}
+}
+UserDto.java
+package com.ty.foodorder.DTO;
+import java.util.List ;
+import javax.persistence.CascadeType ;
+import javax.persistence.Entity ;
+import javax.persistence.GeneratedValue ;
+import javax.persistence.GenerationType ;
+import javax.persistence.Id ;
+import javax.persistence.OneToMany ;
+@Entity
+public class UserDTO
+{
+@Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+private int id;
+private String name;
+private String email;
+private String password;
+@OneToMany(cascade = CascadeType.ALL,mappedBy = "userDTO")
+List < FoodOrderDTO > foodOrderDTO;
+public List < FoodOrderDTO > getFoodOrderDTO ( )
+{
+return foodOrderDTO ;
+}
+public void setFoodOrderDTO ( List < FoodOrderDTO > foodOrderDTO )
+{
+this.foodOrderDTO = foodOrderDTO ;
+}
+public int getId ( )
+{
+return id ;
+}
+public void setId ( int id )
+{
+this.id = id ;
+}
+public String getName ( )
+{
+return name ;
+}
+public void setName ( String name )
+{
+this.name = name ;
+}
+public String getEmail ( )
+{
+return email ;
+}
+public void setEmail ( String email )
+{
+this.email = email ;
+}
+public String getPassword ( )
+{
+return password ;
+}
+public void setPassword ( String password )
+{
+this.password = password ;
+}
+}
+Dao classes:
+AdminDao.java
+package com.ty.foodorder.DAO;
+import javax.persistence.EntityManager ;
+import javax.persistence.EntityManagerFactory ;
+import javax.persistence.EntityTransaction ;
+import org.springframework.beans.factory.annotation.Autowired ;
+import org.springframework.stereotype.Component ;
+import com.ty.foodorder.DTO.AdminDTO ;
+@Component
+public class AdminDAO
+{
+@Autowired
+EntityManagerFactory entityManagerFactory;
+public void addAdmin(AdminDTO adminDTO)
+{
+EntityManager
+entityManager=entityManagerFactory.createEntityManager ( );
+EntityTransaction entityTransaction=entityManager.getTransaction ( );
+entityTransaction.begin ( );
+entityManager.persist ( adminDTO );
+entityTransaction.commit ( );
+}
+public AdminDTO fetchAdmin(int id)
+{
+EntityManager
+entityManager=entityManagerFactory.createEntityManager ( );
+return entityManager.find ( AdminDTO.class , id );
+}
+}
+FoodOrderDao.java
+package com.ty.foodorder.DAO;
+import javax.persistence.EntityManager ;
+import javax.persistence.EntityManagerFactory ;
+import javax.persistence.EntityTransaction ;
+import org.springframework.beans.factory.annotation.Autowired ;
+import org.springframework.stereotype.Component ;
+import com.ty.foodorder.DTO.FoodOrderDTO ;
+@Component
+public class FoodOrderDAO
+{
+@Autowired
+EntityManagerFactory entityManagerFactory;
+public FoodOrderDTO addFoodOrder(FoodOrderDTO foodOrderDTO)
+{
+EntityManager
+entityManager=entityManagerFactory.createEntityManager ( );
+EntityTransaction
+entityTransaction=entityManager.getTransaction ( );
+entityTransaction.begin ( );
+entityManager.persist ( foodOrderDTO );
+entityTransaction.commit ( );
+return foodOrderDTO ;
+}
+}
+ProductDao.java
+package com.ty.foodorder.DAO;
+import java.util.List ;
+import javax.persistence.EntityManager ;
+import javax.persistence.EntityManagerFactory ;
+import javax.persistence.EntityTransaction ;
+import javax.persistence.Query ;
+import org.springframework.beans.factory.annotation.Autowired ;
+import org.springframework.stereotype.Component ;
+import com.ty.foodorder.DTO.ProductDTO ;
+@Component
+public class ProductDAO
+{
+@Autowired
+EntityManagerFactory entityManagerFactory;
+public ProductDTO addProduct(ProductDTO productDTO)
+{
+EntityManager
+entityManager=entityManagerFactory.createEntityManager ( );
+EntityTransaction
+entityTransaction=entityManager.getTransaction ( );
+entityTransaction.begin ( );
+entityManager.persist ( productDTO );
+entityTransaction.commit ( );
+return productDTO ;
+}
+public List < ProductDTO > fetchallproduct ( )
+{
+EntityManager
+entityManager=entityManagerFactory.createEntityManager ( );
+Query query = entityManager.createQuery ( "select s from
+ProductDTO s",ProductDTO.class );
+List<ProductDTO> productDTOs = query.getResultList ( );
+return productDTOs;
+}
+public void deleteProduct(int id)
+{
+EntityManager
+entityManager=entityManagerFactory.createEntityManager ( );
+EntityTransaction
+entityTransaction=entityManager.getTransaction ( );
+ProductDTO product = entityManager.find ( ProductDTO.class , id
+);
+entityTransaction.begin ( );
+entityManager.remove ( product );
+entityTransaction.commit ( );
+}
+public void updateProduct ( ProductDTO productDTO )
+{
+EntityManager
+entityManager=entityManagerFactory.createEntityManager ( );
+EntityTransaction
+entityTransaction=entityManager.getTransaction ( );
+entityTransaction.begin ( );
+entityManager.merge ( productDTO );
+entityTransaction.commit ( );
+}
+public ProductDTO searchProduct(int id)
+{
+EntityManager
+entityManager=entityManagerFactory.createEntityManager ( );
+return entityManager.find ( ProductDTO.class , id );
+}
+}
+UserDao.java
+package com.ty.foodorder.DAO;
+import java.util.List ;
+import javax.persistence.EntityManager ;
+import javax.persistence.EntityManagerFactory ;
+import javax.persistence.EntityTransaction ;
+import javax.persistence.Query ;
+import org.springframework.beans.factory.annotation.Autowired ;
+import org.springframework.stereotype.Component ;
+import com.ty.foodorder.DTO.UserDTO ;
+@Component
+public class UserDAO
+{
+@Autowired
+EntityManagerFactory entityManagerFactory;
+public UserDTO addUser(UserDTO userDTO)
+{
+EntityManager
+entityManager=entityManagerFactory.createEntityManager ( );
+EntityTransaction
+entityTransaction=entityManager.getTransaction ( );
+entityTransaction.begin ( );
+entityManager.persist ( userDTO );
+entityTransaction.commit ( );
+return userDTO ;
+}
+public List < UserDTO > fetchbyuseremailid(String email,String password)
+{
+EntityManager
+entityManager=entityManagerFactory.createEntityManager ( );
+Query query=entityManager.createQuery ( "select c from
+UserDTO c where c.email=?1 and c.password=?2");
+query.setParameter ( 1 , email );
+query.setParameter ( 2 , password );
+List<UserDTO> users = query.getResultList ( );
+return users;
+}
+public List < UserDTO > fetchallUser ( )
+{
+EntityManager
+entityManager=entityManagerFactory.createEntityManager ( );
+Query query = entityManager.createQuery ( "select s from
+UserDTO s",UserDTO.class );
+List<UserDTO> userDTOs = query.getResultList ( );
+return userDTOs;
+}
+public void deleteUser(int id)
+{
+EntityManager
+entityManager=entityManagerFactory.createEntityManager ( );
+EntityTransaction
+entityTransaction=entityManager.getTransaction ( );
+UserDTO userDTO = entityManager.find ( UserDTO.class , id );
+entityTransaction.begin ( );
+entityManager.remove ( userDTO );
+entityTransaction.commit ( );
+}
+public void updateUser ( UserDTO userDTO )
+{
+EntityManager
+entityManager=entityManagerFactory.createEntityManager ( );
+EntityTransaction
+entityTransaction=entityManager.getTransaction ( );
+entityTransaction.begin ( );
+entityManager.merge ( userDTO);
+entityTransaction.commit ( );
+}
+public UserDTO searchUser(int id)
+{
+EntityManager
+entityManager=entityManagerFactory.createEntityManager ( );
+return entityManager.find ( UserDTO.class , id );
+}
+}
+Service classes:
+AdminService.java
+package com.ty.foodorder.Service;
+import org.springframework.beans.factory.annotation.Autowired ;
+import org.springframework.stereotype.Component ;
+import com.ty.foodorder.DAO.AdminDAO ;
+import com.ty.foodorder.DTO.AdminDTO ;
+@Component
+public class AdminService
+{
+@Autowired
+AdminDAO adminDAO;
+public void addAdmin(AdminDTO adminDTO)
+{
+adminDAO.addAdmin ( adminDTO );
+}
+public AdminDTO fetchAdmin(int id)
+{
+return adminDAO.fetchAdmin ( id );
+}
+}
+FoodOrderService.java
+package com.ty.foodorder.Service;
+import org.springframework.beans.factory.annotation.Autowired ;
+import org.springframework.stereotype.Component ;
+import com.ty.foodorder.DAO.FoodOrderDAO ;
+import com.ty.foodorder.DTO.FoodOrderDTO ;
+@Component
+public class FoodOrderService
+{
+@Autowired
+FoodOrderDAO foodOrderDAO;
+public FoodOrderDTO addProduct(FoodOrderDTO foodOrderDTO)
+{
+return foodOrderDAO.addFoodOrder ( foodOrderDTO );
+}
+}
+ProductService.java
+package com.ty.foodorder.Service;
+import java.util.List ;
+import org.springframework.beans.factory.annotation.Autowired ;
+import org.springframework.stereotype.Component ;
+import com.ty.foodorder.DAO.ProductDAO ;
+import com.ty.foodorder.DTO.ProductDTO ;
+@Component
+public class ProductService
+{
+@Autowired
+ProductDAO productDAO;
+public ProductDTO addProduct(ProductDTO productDTO)
+{
+return productDAO.addProduct ( productDTO );
+}
+public List < ProductDTO > fetchallproduct ( )
+{
+return productDAO.fetchallproduct ( );
+}
+public void deleteProduct(int id)
+{
+productDAO.deleteProduct ( id );
+}
+public void updateProduct ( ProductDTO productDTO )
+{
+productDAO.updateProduct ( productDTO );
+}
+public ProductDTO searchProduct(int id)
+{
+return productDAO.searchProduct ( id );
+}
+}
+UserService.java
+package com.ty.foodorder.Service;
+import java.util.List ;
+import org.springframework.beans.factory.annotation.Autowired ;
+import org.springframework.stereotype.Component ;
+import com.ty.foodorder.DAO.UserDAO ;
+import com.ty.foodorder.DTO.UserDTO ;
+@Component
+public class UserService
+{
+@Autowired
+UserDAO userDAO;
+public UserDTO addUser(UserDTO userDTO)
+{
+return userDAO.addUser ( userDTO );
+}
+public UserDTO fetchbyuseremailid(String email,String password)
+{
+List < UserDTO > users = userDAO.fetchbyuseremailid ( email ,
+password );
+for(UserDTO user:users)
+{
+return user;
+}
+return null;
+}
+public List < UserDTO > fetchallUser ( )
+{
+return userDAO.fetchallUser ( );
+}
+public void deleteUser(int id)
+{
+userDAO.deleteUser ( id );
+}
+public void updateUser( UserDTO userDTO )
+{
+userDAO.updateUser ( userDTO );
+}
+public UserDTO searchUser(int id)
+{
+return userDAO.searchUser( id );
+}
+}
+Controller classes:
+AdminController.java
+package com.ty.foodorder.Controller;
+import org.springframework.beans.factory.annotation.Autowired ;
+import org.springframework.stereotype.Controller ;
+import org.springframework.web.bind.annotation.RequestMapping ;
+import org.springframework.web.bind.annotation.RequestParam ;
+import org.springframework.web.servlet.ModelAndView ;
+import com.ty.foodorder.DTO.AdminDTO ;
+import com.ty.foodorder.Service.AdminService ;
+@Controller
+public class AdminController
+{
+@Autowired
+AdminService adminService;
+@RequestMapping("/loginAdmin")
+public ModelAndView loginAdmin ( @RequestParam String email,
+@RequestParam String password)
+{
+AdminDTO admin = adminService.fetchAdmin ( 1 );
+if(email.equals ( admin.getEmail ( ) ) && password.equals (
+admin.getPassword ( )))
+{
+ModelAndView modelAndView=new ModelAndView (
+"home.jsp");
+modelAndView.addObject ( "msg","Login Successfull" );
+return modelAndView;
+}
+ModelAndView modelAndView=new ModelAndView
+("index.jsp");
+modelAndView.addObject ( "msg","Invalid Login
+Credentials" );
+return modelAndView;
+}
+@RequestMapping("/addAdmin")
+public ModelAndView addAdmin()
+{
+AdminDTO adminDTO=new AdminDTO ( );
+adminDTO.setEmail ( "admin" );
+adminDTO.setPassword ( "admin" );
+adminService.addAdmin ( adminDTO );
+ModelAndView modelAndView=new ModelAndView ("index.jsp");
+modelAndView.addObject ( "msg","Admin account Created Successfully"
+);
+return modelAndView;
+}
+}
+FoodOrderController.java
+package com.ty.foodorder.Controller;
+import java.util.ArrayList ;
+import java.util.List ;
+import javax.servlet.http.HttpSession ;
+import org.springframework.beans.factory.annotation.Autowired ;
+import org.springframework.stereotype.Controller ;
+import org.springframework.web.bind.annotation.ModelAttribute ;
+import org.springframework.web.bind.annotation.RequestMapping ;
+import org.springframework.web.bind.annotation.RequestParam ;
+import org.springframework.web.servlet.ModelAndView ;
+import com.ty.foodorder.DTO.FoodOrderDTO ;
+import com.ty.foodorder.DTO.ItemDTO ;
+import com.ty.foodorder.DTO.ProductDTO ;
+import com.ty.foodorder.DTO.UserDTO ;
+import com.ty.foodorder.Service.FoodOrderService ;
+import com.ty.foodorder.Service.ProductService ;
+import com.ty.foodorder.Service.UserService ;
+@Controller
+public class FoodOrderController
+{
+@Autowired
+FoodOrderService foodOrderService;
+@Autowired
+ProductService productService;
+@Autowired
+UserService userService;
+@RequestMapping("/foodOrder1")
+public ModelAndView loadFoodOrder()
+{
+ModelAndView modelAndView=new ModelAndView ("foodOrder.jsp");
+modelAndView.addObject ( "foodOrder",new FoodOrderDTO ( ) );
+return modelAndView;
+}
+@RequestMapping("/foodOrder2")
+public ModelAndView saveFoodOrder(@ModelAttribute FoodOrderDTO
+foodOrder,HttpSession httpSession)
+{
+httpSession.setAttribute ( "foodOrder" , foodOrder );
+httpSession.setAttribute ( "list" , new ArrayList<ItemDTO>( ));
+ModelAndView modelAndView=new ModelAndView ("menu");
+return modelAndView;
+}
+@RequestMapping("/menu")
+public ModelAndView getmenu()
+{
+List < ProductDTO > products = productService.fetchallproduct ( );
+ModelAndView modelAndView=new ModelAndView
+("menu.jsp");
+modelAndView.addObject ( "products",products );
+return modelAndView;
+}
+@RequestMapping("/addOrder")
+public ModelAndView addOrder(@RequestParam int Id,@ModelAttribute
+ModelAndView msg )
+{
+ProductDTO product = productService.searchProduct ( Id );
+ItemDTO itemDTO=new ItemDTO ( );
+itemDTO.setName ( product.getName ( ) );
+itemDTO.setCost ( product.getCost ( ) );
+ModelAndView modelAndView=new ModelAndView ("addOrder.jsp");
+modelAndView.addObject ( "item",itemDTO);
+modelAndView.addObject ( "msg",msg );
+return modelAndView;
+}
+@RequestMapping("/addItem")
+public ModelAndView addItem(@ModelAttribute ItemDTO
+itemDTO,HttpSession httpSession)
+{
+FoodOrderDTO foodOrder = (FoodOrderDTO)httpSession.getAttribute (
+"foodOrder" );
+itemDTO.setFoodOrderDTO ( foodOrder );
+itemDTO.setCost ( itemDTO.getCost ( )*itemDTO.getQuantity ( ) );
+foodOrder.setCost ( foodOrder.getCost ( )+itemDTO.getCost ( ) );
+@ SuppressWarnings ( "unchecked" )
+List< ItemDTO > lists = (ArrayList <ItemDTO>)httpSession.getAttribute (
+"list" );
+lists.add ( itemDTO );
+ModelAndView modelAndView=new ModelAndView ("/menu");
+modelAndView.addObject ( "msg","Item Added" );
+return modelAndView;
+}
+@RequestMapping("/submitOrder")
+public ModelAndView submitOrder(HttpSession httpSession)
+{
+@ SuppressWarnings ( "unchecked" )
+List< ItemDTO > lists = (ArrayList <ItemDTO>)httpSession.getAttribute (
+"list" );
+FoodOrderDTO foodOrder = (FoodOrderDTO)httpSession.getAttribute (
+"foodOrder" );
+foodOrder.setItemDTOs ( lists );
+UserDTO userDTO=(UserDTO)httpSession.getAttribute( "user" );
+foodOrder.setUserDTO ( userDTO );
+List<FoodOrderDTO> list1=new ArrayList<FoodOrderDTO> ( );
+list1.add ( foodOrder );
+userDTO.setFoodOrderDTO ( list1 );
+userService.updateUser ( userDTO );
+ModelAndView modelAndView=new ModelAndView ("generatebill");
+modelAndView.addObject ( "msg","Order Placed" );
+return modelAndView;
+}
+@RequestMapping("/generatebill")
+public ModelAndView generatebill(HttpSession httpSession)
+{
+FoodOrderDTO foodOrderDTO=( FoodOrderDTO )
+httpSession.getAttribute ( "foodOrder" );
+ModelAndView modelAndView=new ModelAndView ("bill.jsp" );
+modelAndView.addObject ( "foodOrder",foodOrderDTO );
+return modelAndView;
+}
+}
+ProductController.java
+package com.ty.foodorder.Controller;
+import java.util.List ;
+import org.springframework.beans.factory.annotation.Autowired ;
+import org.springframework.stereotype.Controller ;
+import org.springframework.web.bind.annotation.ModelAttribute ;
+import org.springframework.web.bind.annotation.RequestMapping ;
+import org.springframework.web.bind.annotation.RequestParam ;
+import org.springframework.web.servlet.ModelAndView ;
+import com.ty.foodorder.DTO.ProductDTO ;
+import com.ty.foodorder.Service.ProductService ;
+@Controller
+public class ProductController
+{
+@Autowired
+ProductService productService;
+@RequestMapping("/loadProduct")
+public ModelAndView loadUser()
+{
+ModelAndView modelAndView=new ModelAndView
+("addProduct.jsp");
+ProductDTO productDTO=new ProductDTO ( );
+modelAndView.addObject ( "productDTO",productDTO );
+return modelAndView;
+}
+@RequestMapping("/saveProduct")
+public ModelAndView saveUser(@ModelAttribute ProductDTO
+productDTO )
+{
+ProductDTO product=productService.addProduct ( productDTO );
+if(product!=null)
+{
+ModelAndView modelAndView=new ModelAndView
+("home.jsp");
+modelAndView.addObject ( "msg","Product Added
+Successfully" );
+return modelAndView;
+}
+ModelAndView modelAndView=new ModelAndView
+("addProduct.jsp");
+modelAndView.addObject ( "msg","Error Adding Product" );
+return modelAndView;
+}
+@RequestMapping("/productList")
+public ModelAndView productList()
+{
+List < ProductDTO > products = productService.fetchallproduct ( );
+ModelAndView modelAndView=new ModelAndView
+("productlist.jsp");
+modelAndView.addObject ( "products",products );
+return modelAndView ;
+}
+@RequestMapping("/deleteProduct")
+public ModelAndView deleteProduct(@RequestParam int Id)
+{
+productService.deleteProduct ( Id );
+ModelAndView modelAndView=new ModelAndView
+("/productList");
+modelAndView.addObject ( "msg","Data removed Successfully");
+return modelAndView;
+}
+@RequestMapping("/updateProduct")
+public ModelAndView updateProduct(@RequestParam int Id)
+{
+ProductDTO productDTO=productService.searchProduct ( Id );
+ModelAndView modelAndView=new ModelAndView
+("updateProduct.jsp");
+modelAndView.addObject ( "product",productDTO);
+return modelAndView;
+}
+@RequestMapping("/updateproduct1")
+public ModelAndView updateproduct1(@ModelAttribute ProductDTO
+productDTO)
+{
+productService.updateProduct ( productDTO );
+ModelAndView modelAndView=new ModelAndView
+("/productList");
+modelAndView.addObject ( "msg","Data Updated Successfully");
+return modelAndView;
+}
+}
+UserController.java
+package com.ty.foodorder.Controller;
+import java.util.List ;
+import javax.servlet.http.HttpSession ;
+import org.springframework.beans.factory.annotation.Autowired ;
+import org.springframework.stereotype.Controller ;
+import org.springframework.web.bind.annotation.ModelAttribute ;
+import org.springframework.web.bind.annotation.RequestMapping ;
+import org.springframework.web.bind.annotation.RequestParam ;
+import org.springframework.web.servlet.ModelAndView ;
+import com.ty.foodorder.DTO.FoodOrderDTO ;
+import com.ty.foodorder.DTO.UserDTO ;
+import com.ty.foodorder.Service.UserService ;
+@Controller
+public class UserController
+{
+@Autowired
+UserService userService;
+@RequestMapping("/loadUser")
+public ModelAndView loadUser()
+{
+ModelAndView modelAndView=new ModelAndView ("addUser.jsp");
+UserDTO userDTO=new UserDTO ( );
+modelAndView.addObject ( "userDTO",userDTO );
+return modelAndView;
+}
+@RequestMapping("/saveUser")
+public ModelAndView saveUser(@ModelAttribute UserDTO userDTO )
+{
+UserDTO user = userService.addUser ( userDTO );
+if(user!=null)
+{
+ModelAndView modelAndView=new ModelAndView
+("home.jsp");
+modelAndView.addObject ( "msg","Account Created Successfully"
+);
+return modelAndView;
+}
+ModelAndView modelAndView=new ModelAndView ("addUser.jsp");
+modelAndView.addObject ( "msg","Error Creating Account" );
+return modelAndView;
+}
+@RequestMapping("/loginUser")
+public ModelAndView loginUser ( @RequestParam String email,
+@RequestParam String password,HttpSession httpSession)
+{
+UserDTO user = userService.fetchbyuseremailid ( email , password );
+if(user!=null)
+{
+httpSession.setAttribute ( "user" , user );
+ModelAndView modelAndView=new ModelAndView (
+"userNavigation.jsp");
+modelAndView.addObject ( "msg","Login Successfull" );
+return modelAndView;
+}
+ModelAndView modelAndView=new ModelAndView
+("loginUser.jsp");
+modelAndView.addObject ( "msg","Invalid Login Credentials" );
+return modelAndView;
+}
+@RequestMapping("/fetchallorder")
+public ModelAndView fetchallorder(HttpSession httpSession)
+{
+UserDTO user=(UserDTO)httpSession.getAttribute ( "user" );
+List < FoodOrderDTO > list3 = user.getFoodOrderDTO ( );
+ModelAndView modelAndView=new ModelAndView
+("fetchallorder.jsp");
+modelAndView.addObject ( "list3",list3 );
+return modelAndView;
+}
+@RequestMapping("/userList")
+public ModelAndView userList()
+{
+List < UserDTO > users = userService.fetchallUser ( );
+ModelAndView modelAndView=new ModelAndView ("userlist.jsp");
+modelAndView.addObject ( "users",users );
+return modelAndView ;
+}
+@RequestMapping("/deleteUser")
+public ModelAndView deleteUser(@RequestParam int Id)
+{
+userService.deleteUser ( Id );
+ModelAndView modelAndView=new ModelAndView ("/userList");
+modelAndView.addObject ( "msg","Data removed Successfully");
+return modelAndView;
+}
